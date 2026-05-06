@@ -7,6 +7,10 @@
 <section class="py-5">
     <div class="container">
         <h1 class="fw-bold mb-4">Geçmiş Belgelerim</h1>
+        @if (TempData["HistoryError"] is string historyError && !string.IsNullOrWhiteSpace(historyError))
+        {
+            <div class="alert alert-warning">@historyError</div>
+        }
 
         @if (Model is null || Model.Count == 0)
         {
@@ -43,14 +47,31 @@
                                     @if (docTypes.Contains(DocumentType.Proposal))
                                     {
                                         <span class="badge text-bg-primary me-1">Teklif</span>
+                                        <a class="btn btn-sm btn-outline-primary ms-1" asp-action="Download" asp-controller="History" asp-route-conversationId="@conversation.Id" asp-route-type="Proposal">PDF</a>
                                     }
                                     @if (docTypes.Contains(DocumentType.Contract))
                                     {
                                         <span class="badge text-bg-success me-1">Sözleşme</span>
+                                        <a class="btn btn-sm btn-outline-success ms-1" asp-action="Download" asp-controller="History" asp-route-conversationId="@conversation.Id" asp-route-type="Contract">PDF</a>
                                     }
                                     @if (docTypes.Contains(DocumentType.Invoice))
                                     {
                                         <span class="badge text-bg-warning">Fatura</span>
+                                        <a class="btn btn-sm btn-outline-warning ms-1" asp-action="Download" asp-controller="History" asp-route-conversationId="@conversation.Id" asp-route-type="Invoice">PDF</a>
+                                    }
+
+                                    @if (conversation.Documents.Any(d => !string.IsNullOrWhiteSpace(d.JsonData)))
+                                    {
+                                        <details class="mt-2">
+                                            <summary class="small text-muted">Yazı içeriğini göster</summary>
+                                            @foreach (var doc in conversation.Documents.OrderBy(d => d.DocType))
+                                            {
+                                                <div class="mt-2">
+                                                    <div class="fw-semibold small">@doc.DocType</div>
+                                                    <pre class="small bg-light p-2 rounded border">@doc.JsonData</pre>
+                                                </div>
+                                            }
+                                        </details>
                                     }
                                 </td>
                                 <td class="text-end">

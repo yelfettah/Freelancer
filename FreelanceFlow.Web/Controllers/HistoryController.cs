@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using FreelanceFlow.Core.Entities;
 using FreelanceFlow.Core.Interfaces;
 using FreelanceFlow.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
@@ -54,5 +55,44 @@ public class HistoryController : Controller
 
         _ = _pdfGeneratorService;
         return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Download(int conversationId, DocumentType type)
+    {
+        var userIdValue = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (!Guid.TryParse(userIdValue, out var userId))
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+
+        var conversation = await _dbContext.Conversations
+            .Include(c => c.Documents)
+            .FirstOrDefaultAsync(c => c.Id == conversationId && c.UserId == userId && !c.IsDeleted);
+
+        if (conversation is null)
+        {
+            return RedirectToAction("Index");
+        }
+
+        var document = conversation.Documents
+            .OrderByDescending(d => d.CreatedAt)
+            .FirstOrDefault(d => d.DocType == type);
+
+        if (document is null || document.PdfData.Length == 0)
+        {
+            TempData["HistoryError"] = "Bu kayıt için ilgili PDF bulunamadı.";
+            return RedirectToAction("Index");
+        }
+
+        var fileName = type switch
+        {
+            DocumentType.Proposal => "Teklif.pdf",
+            DocumentType.Contract => "Sozlesme.pdf",
+            DocumentType.Invoice => "Fatura.pdf",
+            _ => "Belge.pdf"
+        };
+
+        return File(document.PdfData, "application/pdf", fileName);
     }
 }

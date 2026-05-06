@@ -1,27 +1,29 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-    var form = document.querySelector("form");
-    var loadingOverlay = document.querySelector(".loading-overlay");
-    var loadingMessage = document.querySelector(".loading-message");
-    var loadingTexts = [
+    var form = document.getElementById("generateForm");
+    var overlay = document.getElementById("loadingOverlay");
+    var loadingText = document.getElementById("loadingText");
+    var messages = [
         "Yazışma analiz ediliyor...",
         "Teklif hazırlanıyor...",
         "Sözleşme oluşturuluyor...",
-        "Fatura düzenleniyor..."
+        "Fatura düzenleniyor...",
+        "Son rötuşlar yapılıyor..."
     ];
-    var loadingIndex = 0;
-    var loadingIntervalId = null;
+    var messageIndex = 0;
+    var intervalId;
 
-    if (form && loadingOverlay) {
+    if (form && overlay && loadingText && !window.__ffCreateScriptBound) {
         form.addEventListener("submit", function () {
-            loadingOverlay.classList.add("show");
+            overlay.classList.add("show");
 
-            if (loadingMessage) {
-                loadingMessage.textContent = loadingTexts[0];
-                loadingIntervalId = setInterval(function () {
-                    loadingIndex = (loadingIndex + 1) % loadingTexts.length;
-                    loadingMessage.textContent = loadingTexts[loadingIndex];
-                }, 3000);
-            }
+            intervalId = setInterval(function () {
+                loadingText.style.opacity = "0";
+                setTimeout(function () {
+                    messageIndex = (messageIndex + 1) % messages.length;
+                    loadingText.textContent = messages[messageIndex];
+                    loadingText.style.opacity = "1";
+                }, 180);
+            }, 2500);
         });
     }
 
@@ -29,37 +31,35 @@
     copyButtons.forEach(function (button) {
         button.addEventListener("click", function () {
             var targetSelector = button.getAttribute("data-target");
-            var targetElement = targetSelector ? document.querySelector(targetSelector) : null;
-            var textToCopy = targetElement ? targetElement.value || targetElement.textContent : "";
-            var originalText = button.textContent;
+            var target = targetSelector ? document.querySelector(targetSelector) : null;
+            if (!target) return;
 
-            if (!textToCopy) {
-                return;
-            }
+            var text = target.value || target.textContent || "";
+            var original = button.textContent;
 
-            navigator.clipboard.writeText(textToCopy).then(function () {
+            navigator.clipboard.writeText(text).then(function () {
                 button.textContent = "Kopyalandı ✓";
                 setTimeout(function () {
-                    button.textContent = originalText;
+                    button.textContent = original;
                 }, 2000);
             });
         });
     });
 
-    var autoResizeTextarea = document.querySelector("#conversationTextarea");
-    if (autoResizeTextarea) {
-        var resize = function () {
-            autoResizeTextarea.style.height = "auto";
-            autoResizeTextarea.style.height = autoResizeTextarea.scrollHeight + "px";
-        };
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("fade-in-up");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
 
-        autoResizeTextarea.addEventListener("input", resize);
-        resize();
-    }
+    document.querySelectorAll(".card, .result-card, .create-header, .form-section").forEach(function (el) {
+        observer.observe(el);
+    });
 
     window.addEventListener("beforeunload", function () {
-        if (loadingIntervalId) {
-            clearInterval(loadingIntervalId);
-        }
+        if (intervalId) clearInterval(intervalId);
     });
 });

@@ -1,26 +1,24 @@
 using System.IO.Compression;
+using System.Security.Claims;
 using System.Text.Json;
 using FreelanceFlow.Core.Interfaces;
 using FreelanceFlow.Core.Models;
-using FreelanceFlow.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FreelanceFlow.Web.Controllers;
 
 public class DocumentController : Controller
 {
-    private readonly IClaudeAIService _claudeAiService;
+    private static readonly Guid DemoUserId = Guid.Parse("8f6cf95b-739e-4f98-b3ea-2f3d8f22dc51");
+    private readonly IDocumentService _documentService;
     private readonly IPdfGeneratorService _pdfGeneratorService;
-    private readonly AppDbContext _dbContext;
 
     public DocumentController(
-        IClaudeAIService claudeAiService,
-        IPdfGeneratorService pdfGeneratorService,
-        AppDbContext dbContext)
+        IDocumentService documentService,
+        IPdfGeneratorService pdfGeneratorService)
     {
-        _claudeAiService = claudeAiService;
+        _documentService = documentService;
         _pdfGeneratorService = pdfGeneratorService;
-        _dbContext = dbContext;
     }
 
     [HttpGet]
@@ -39,12 +37,9 @@ public class DocumentController : Controller
 
         try
         {
-            var result = await _claudeAiService.AnalyzeConversationAsync(
-                model.RawText,
-                model.FreelancerName,
-                model.ClientName,
-                model.Sector,
-                model.Currency);
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = Guid.TryParse(userIdClaim, out var parsedUserId) ? parsedUserId : DemoUserId;
+            var result = await _documentService.ProcessConversationAsync(model, userId);
 
             TempData["GeneratedResult"] = JsonSerializer.Serialize(result);
             TempData["ConversationInput"] = JsonSerializer.Serialize(model);

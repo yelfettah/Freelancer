@@ -7,82 +7,84 @@
 {
     <section class="py-5">
         <div class="container">
-            <div class="alert alert-warning">
-                Sonuç verisi bulunamadı. Lütfen tekrar deneyin.
-            </div>
-            <a class="btn btn-accent" asp-controller="Document" asp-action="Create">Belge Oluştur sayfasına dön</a>
+            <div class="alert alert-warning">Sonuç verisi bulunamadı. Lütfen tekrar deneyin.</div>
+            <a class="btn-accent" asp-controller="Document" asp-action="Create">Belge Oluştur sayfasına dön</a>
         </div>
     </section>
     return;
 }
 
-<section class="py-4">
+<section class="py-5">
     <div class="container">
-        <div class="success-banner mb-4 p-4 p-md-5">
+        <div class="result-header">
             <h2 class="fw-bold mb-2">Belgeleriniz Hazır! 🎉</h2>
-            <p class="mb-3">Yazışmanız başarıyla analiz edildi. Tüm belgeler profesyonel formatta üretildi.</p>
-            <a class="btn btn-light fw-semibold px-4" asp-controller="Document" asp-action="DownloadAll">Tümünü İndir (ZIP)</a>
+            <p class="mb-2">Tüm belgeler başarıyla oluşturuldu.</p>
+            <a class="download-all-btn" asp-action="DownloadAll">Tümünü İndir (ZIP)</a>
         </div>
 
-        <div class="row g-4">
-            <div class="col-lg-6">
-                <div class="result-card result-card-proposal h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <span class="display-6 me-2">📋</span>
-                        <h4 class="mb-0 fw-bold">Teklif Dokümanı</h4>
-                    </div>
-                    <p class="mb-1"><strong>Proje:</strong> @Model.Proposal.ProjectTitle</p>
-                    <p class="mb-1"><strong>Fiyat:</strong> @Model.Proposal.Price.ToString("N2") @Model.Proposal.Currency</p>
-                    <p class="mb-3"><strong>Süre:</strong> @Model.Proposal.Timeline</p>
-                    <a class="btn btn-outline-primary" asp-controller="Document" asp-action="DownloadProposal">PDF İndir</a>
-                </div>
+        <div class="result-cards">
+            <div class="card result-card">
+                <div class="card-icon icon-proposal">📋</div>
+                <h3>Teklif Dokümanı</h3>
+                <div class="detail">@Model.Proposal.ProjectTitle</div>
+                <div class="detail">@Model.Proposal.Price.ToString("N0") @Model.Proposal.Currency</div>
+                <div class="detail">@Model.Proposal.Timeline</div>
+                <a class="btn-outline download-btn" asp-action="DownloadProposal">PDF İndir</a>
             </div>
 
-            <div class="col-lg-6">
-                <div class="result-card result-card-contract h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <span class="display-6 me-2">📝</span>
-                        <h4 class="mb-0 fw-bold">Hizmet Sözleşmesi</h4>
-                    </div>
-                    <p class="mb-1"><strong>Freelancer:</strong> @Model.Contract.FreelancerName</p>
-                    <p class="mb-1"><strong>Müşteri:</strong> @Model.Contract.ClientName</p>
-                    <p class="mb-1"><strong>Başlangıç:</strong> @Model.Contract.StartDate</p>
-                    <p class="mb-3"><strong>Bitiş:</strong> @Model.Contract.EndDate</p>
-                    <a class="btn btn-outline-success" asp-controller="Document" asp-action="DownloadContract">PDF İndir</a>
-                </div>
+            <div class="card result-card">
+                <div class="card-icon icon-contract">📝</div>
+                <h3>Hizmet Sözleşmesi</h3>
+                <div class="detail">@Model.Contract.FreelancerName ↔ @Model.Contract.ClientName</div>
+                <div class="detail">@Model.Contract.StartDate - @Model.Contract.EndDate</div>
+                <a class="btn-outline download-btn" asp-action="DownloadContract">PDF İndir</a>
             </div>
 
-            <div class="col-lg-6">
-                <div class="result-card result-card-invoice h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <span class="display-6 me-2">💰</span>
-                        <h4 class="mb-0 fw-bold">Fatura</h4>
-                    </div>
-                    <p class="mb-1"><strong>Fatura No:</strong> @Model.Invoice.InvoiceNo</p>
-                    <p class="mb-1"><strong>Toplam:</strong> @Model.Invoice.Total.ToString("N2") @Model.Invoice.Currency</p>
-                    <p class="mb-3"><strong>Son Ödeme:</strong> @Model.Invoice.DueDate</p>
-                    <a class="btn btn-outline-warning" asp-controller="Document" asp-action="DownloadInvoice">PDF İndir</a>
-                </div>
+            <div class="card result-card">
+                <div class="card-icon icon-invoice">💰</div>
+                <h3>Fatura</h3>
+                <div class="detail">@Model.Invoice.InvoiceNo</div>
+                <div class="detail">Toplam: @Model.Invoice.Total.ToString("N0") @Model.Invoice.Currency (KDV Dahil)</div>
+                <div class="detail">Son Ödeme: @Model.Invoice.DueDate</div>
+                <a class="btn-outline download-btn" asp-action="DownloadInvoice">PDF İndir</a>
             </div>
 
-            <div class="col-lg-6">
-                <div class="result-card result-card-email h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <span class="display-6 me-2">✉️</span>
-                        <h4 class="mb-0 fw-bold">Takip E-postası</h4>
-                    </div>
-                    <textarea class="form-control mb-3" rows="8" readonly id="followUpEmailText">@Model.FollowUpEmail</textarea>
-                    <button class="btn btn-outline-dark btn-copy" type="button" data-target="#followUpEmailText">Kopyala</button>
-                </div>
+            <div class="card result-card">
+                <div class="card-icon icon-email">✉️</div>
+                <h3>Takip E-postası</h3>
+                <textarea class="form-control email-text" rows="6" readonly id="followUpEmailText">@Model.FollowUpEmail</textarea>
+                <button class="btn-outline download-btn btn-copy" type="button" data-target="#followUpEmailText">Kopyala</button>
             </div>
         </div>
 
-        <div class="alert alert-info mt-4 border-0 shadow-sm">
-            <strong>Tahmini Tasarruf:</strong> Haftada 4 saat → 30 dakika. %85+ zaman tasarrufu!
+        <div class="savings-box">
+            Tahmini Tasarruf: Haftada 4 saat → 30 dakika. %85+ zaman tasarrufu!
         </div>
 
-        <div class="mt-4 d-flex flex-wrap gap-2">
-            <a class="btn btn-accent" asp-controller="Document" asp-action="Create">Yeni Yazışma Analiz Et</a>
+        <div class="text-center mt-4">
+            <a class="btn-accent" asp-action="Create">Yeni Yazışma Analiz Et</a>
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        (() => {
+            const copyBtn = document.querySelector('.btn-copy');
+            if (!copyBtn) return;
+
+            copyBtn.addEventListener('click', async () => {
+                const selector = copyBtn.getAttribute('data-target');
+                const textarea = selector ? document.querySelector(selector) : null;
+                if (!textarea) return;
+
+                const original = copyBtn.textContent;
+                await navigator.clipboard.writeText(textarea.value || textarea.textContent || '');
+                copyBtn.textContent = 'Kopyalandı ✓';
+                setTimeout(() => {
+                    copyBtn.textContent = original;
+                }, 2000);
+            });
+        })();
+    </script>
+}
