@@ -1,0 +1,82 @@
+@model FreelanceFlow.Core.Models.DashboardStats
+@{
+    ViewData["Title"] = "Dashboard";
+    var mostUsedModule = Model.ModuleUsage.Count > 0
+        ? Model.ModuleUsage.OrderByDescending(x => x.Value).First().Key
+        : "-";
+}
+<section class="container py-5">
+    <div class="create-header mb-4 dashboard-hero">
+        <h1>Hoş Geldiniz! Ne yapmak istersiniz?</h1>
+        <p>FreelanceFlow modülleriyle analiz, teklif ve rapor süreçlerinizi saniyeler içinde yönetin.</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+            <div class="dashboard-card card-gradient-blue staggered-card dashboard-card-premium">
+                <div class="dashboard-emoji">📋</div>
+                <h3>Freelancer Belge Oluştur</h3>
+                <p>Yazışmanızı yapıştırın, teklif, sözleşme ve fatura PDF'i otomatik oluşsun</p>
+                <a class="btn btn-light btn-sm fw-semibold mt-auto" asp-controller="Document" asp-action="Create">Başla →</a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="dashboard-card card-gradient-green staggered-card dashboard-card-premium">
+                <div class="dashboard-emoji">🏪</div>
+                <h3>Franchise Analizi</h3>
+                <p>Marka, konum ve bütçeye göre detaylı franchise fizibilite raporu</p>
+                <div class="d-flex gap-2 mt-auto">
+                    <a class="btn btn-light btn-sm fw-semibold" asp-controller="Franchise" asp-action="Create">Analiz Et →</a>
+                    <a class="btn btn-outline-light btn-sm fw-semibold" asp-controller="Franchise" asp-action="Compare">Karşılaştır</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="dashboard-card card-gradient-red staggered-card dashboard-card-premium">
+                <div class="dashboard-emoji">⚖️</div>
+                <h3>Hukuki Süreç Analizi</h3>
+                <p>Dava türüne göre tahmini avukatlık ücreti, süre ve maliyet hesaplama</p>
+                <a class="btn btn-light btn-sm fw-semibold mt-auto" asp-controller="Lawyer" asp-action="Create">Hesapla →</a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="dashboard-card card-gradient-orange staggered-card dashboard-card-premium">
+                <div class="dashboard-emoji">🏠</div>
+                <h3>Emlak Değerleme &amp; İlan</h3>
+                <p>Mülk bilgilerine göre fiyat tahmini ve profesyonel ilan metni oluştur</p>
+                <div class="d-flex gap-2 mt-auto">
+                    <a class="btn btn-light btn-sm fw-semibold" asp-controller="RealEstate" asp-action="Create">Değerle →</a>
+                    <a class="btn btn-outline-light btn-sm fw-semibold" asp-controller="RealEstate" asp-action="Compare">Karşılaştır</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="dashboard-card card-gradient-purple staggered-card dashboard-card-premium">
+                <div class="dashboard-emoji">🔧</div>
+                <h3>KOBİ / Esnaf Teklif</h3>
+                <p>Tesisatçı, elektrikçi, boyacı gibi hizmetler için profesyonel teklif oluştur</p>
+                <a class="btn btn-light btn-sm fw-semibold mt-auto" asp-controller="SME" asp-action="Create">Teklif Oluştur →</a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="dashboard-card card-gradient-gray staggered-card dashboard-card-premium">
+                <div class="dashboard-emoji">⚙️</div>
+                <h3>Profilim &amp; Ayarlar</h3>
+                <p>Saatlik ücret, banka bilgileri ve özel parametrelerinizi ayarlayın</p>
+                <a class="btn btn-light btn-sm fw-semibold mt-auto" asp-controller="Profile" asp-action="Index">Düzenle →</a>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.TotalDocuments > 0)
+    {
+        <div class="form-section mt-4 fade-in-up">
+            <h4 class="mb-3">İstatistikler</h4>
+            <div class="row g-3">
+                <div class="col-md-4"><div class="stat-box"><span>Toplam oluşturulan belge</span><strong>@Model.TotalDocuments</strong></div></div>
+                <div class="col-md-4"><div class="stat-box"><span>Bu ay oluşturulan belge</span><strong>@Model.ThisMonthCount</strong></div></div>
+                <div class="col-md-4"><div class="stat-box"><span>En çok kullanılan modül</span><strong>@mostUsedModule</strong></div></div>
+            </div>
+        </div>
+    }
+</section>

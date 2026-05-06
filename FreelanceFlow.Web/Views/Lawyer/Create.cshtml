@@ -1,0 +1,30 @@
+@model FreelanceFlow.Core.Models.LawyerRequest
+@{
+    ViewData["Title"] = "Hukuki Analiz";
+}
+<div class="create-container">
+    <div class="create-header">
+        <h1>Hukuki Süreç Analizi</h1>
+        <p>Dava türü ve detayları girin, tahmini maliyet ve süre hesaplayalım.</p>
+    </div>
+    <div class="form-section">
+    <form asp-action="Generate" method="post" class="mt-3" id="lawyerForm" data-loading-kind="lawyer">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <select asp-for="CaseType" class="form-control">
+                    <option>Boşanma (Anlaşmalı)</option><option>Boşanma (Çekişmeli)</option><option>İş Davası (İşe İade)</option><option>İş Davası (Kıdem-İhbar Tazminatı)</option><option>Ticaret Davası</option><option>İcra Takibi</option><option>Miras Davası</option><option>Tapu İptal</option><option>Kira Uyuşmazlığı</option><option>Tüketici Davası</option><option>Ceza Davası</option><option>Trafik Kazası Tazminat</option><option>Malpraktis</option><option>Fikri Mülkiyet</option><option>Diğer</option>
+                </select>
+            </div>
+            <div class="col-md-6"><input asp-for="City" class="form-control" list="citiesLaw" placeholder="Şehir" /></div>
+            <div class="col-12"><textarea asp-for="Description" class="form-control" rows="4" placeholder="Açıklama"></textarea></div>
+            <div class="col-md-4"><select asp-for="OpponentType" class="form-control"><option>Bireysel</option><option>Şirket</option><option>Kurum/Devlet</option></select></div>
+            <div class="col-md-4"><input asp-for="EstimatedValue" class="form-control" placeholder="Tahmini Dava Değeri" /></div>
+            <div class="col-md-4"><select asp-for="Currency" class="form-control"><option>TL</option><option>USD</option><option>EUR</option></select></div>
+            <div class="col-12"><textarea asp-for="Notes" class="form-control" rows="3" placeholder="Ek Notlar"></textarea></div>
+        </div>
+        <datalist id="citiesLaw"><option>İstanbul</option><option>Ankara</option><option>İzmir</option><option>Bursa</option><option>Antalya</option><option>Adana</option><option>Konya</option><option>Gaziantep</option></datalist>
+        <button class="btn-accent mt-3" type="submit">Hesapla ⚖️</button>
+    </form>
+</div>
+</div>
+<div class="loading-overlay" id="loadingOverlay"><div class="loading-card"><div class="spinner"></div><div class="loading-text" id="loadingText">Yasal tarifeler inceleniyor...</div><div class="loading-subtext">Dava süreci analiz ediliyor...</div></div></div>

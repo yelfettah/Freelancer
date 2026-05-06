@@ -27,13 +27,25 @@
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav ms-auto gap-lg-2">
                         <li class="nav-item">
-                            <a class="nav-link @(currentController == "Home" && currentAction == "Index" ? "active" : "")" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+                            <a class="nav-link @(currentController == "Dashboard" ? "active" : "")" asp-controller="Dashboard" asp-action="Index">Ana Sayfa</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link @(currentController == "Document" && currentAction == "Create" ? "active" : "")" asp-controller="Document" asp-action="Create">Belge Oluştur</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle @(currentController is "Document" or "Franchise" or "Lawyer" or "RealEstate" or "SME" ? "active" : "")" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modüller</a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" asp-controller="Document" asp-action="Create">Freelancer</a></li>
+                                <li><a class="dropdown-item" asp-controller="Franchise" asp-action="Create">Franchise</a></li>
+                                <li><a class="dropdown-item" asp-controller="Franchise" asp-action="Compare">Franchise Karşılaştır</a></li>
+                                <li><a class="dropdown-item" asp-controller="Lawyer" asp-action="Create">Avukatlık</a></li>
+                                <li><a class="dropdown-item" asp-controller="RealEstate" asp-action="Create">Emlak</a></li>
+                                <li><a class="dropdown-item" asp-controller="RealEstate" asp-action="Compare">Emlak Karşılaştır</a></li>
+                                <li><a class="dropdown-item" asp-controller="SME" asp-action="Create">KOBİ</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link @(currentController == "History" ? "active" : "")" asp-controller="History" asp-action="Index">Geçmiş</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "Profile" ? "active" : "")" asp-controller="Profile" asp-action="Index">⚙️ Profil</a>
                         </li>
                     </ul>
                 </div>

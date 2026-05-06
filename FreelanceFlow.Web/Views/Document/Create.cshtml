@@ -1,5 +1,20 @@
+@using Microsoft.AspNetCore.Http
 @{
     ViewData["Title"] = "Belge Oluştur";
+    var profileJson = Context.Session.GetString("FreelancerProfile");
+    decimal profileHourly = 0;
+    if (!string.IsNullOrWhiteSpace(profileJson))
+    {
+        try
+        {
+            using var doc = System.Text.Json.JsonDocument.Parse(profileJson);
+            if (doc.RootElement.TryGetProperty("HourlyRate", out var hourlyProperty))
+            {
+                profileHourly = hourlyProperty.GetDecimal();
+            }
+        }
+        catch { }
+    }
 }
 
 <div class="create-container">
@@ -9,10 +24,34 @@
     </div>
 
     <div class="form-section">
-        <form method="post" asp-action="Generate" asp-controller="Document" id="generateForm">
+        <div class="mb-4">
+            <p>
+                <a class="btn btn-outline-secondary btn-sm" data-bs-toggle="collapse" href="#profileCollapse" role="button" aria-expanded="false" aria-controls="profileCollapse">
+                    Profil Bilgilerim
+                </a>
+            </p>
+            <div class="collapse" id="profileCollapse">
+                <div class="card card-body">
+                    @if (!string.IsNullOrWhiteSpace(profileJson))
+                    {
+                        <span>Profil yüklendi ✓ (Saatlik: @profileHourly TL)</span>
+                    }
+                    else
+                    {
+                        <a asp-controller="Profile" asp-action="Index">Profil ayarlamak için tıklayın</a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <form method="post" asp-action="Generate" asp-controller="Document" id="generateForm" data-loading-kind="document">
             <div class="form-group">
                 <label>Yazışma</label>
-                <textarea name="RawText" class="form-control conversation-input" rows="10" required
+                <div class="d-flex gap-2 mb-2">
+                    <button type="button" class="btn btn-outline-secondary btn-sm chat-toggle active" id="rawToggle">Ham Metin</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm chat-toggle" id="chatToggle">Chat Önizleme</button>
+                </div>
+                <textarea name="RawText" id="rawTextArea" class="form-control conversation-input" rows="10" required
                           placeholder="WhatsApp veya e-posta yazışmanızı buraya yapıştırın...
 
 Örnek:
@@ -20,6 +59,7 @@
 [10:16] Siz: Merhaba, tabii. Detayları konuşalım.
 [10:18] Müşteri: E-ticaret sitesi, 150 ürün var.
 [10:20] Siz: Anladım, fiyat ve süre için detayları konuşalım..."></textarea>
+                <div id="chatPreview" class="chat-container d-none"></div>
                 <div class="form-hint">WhatsApp'tan yazışmayı kopyalayıp doğrudan yapıştırabilirsiniz.</div>
             </div>
 
@@ -57,6 +97,18 @@
                 </div>
             </div>
 
+            <div class="form-group mt-3">
+                <label>Özel Parametreler</label>
+                <div id="parameterContainer">
+                    <div class="row g-2 mb-2">
+                        <div class="col-md-5"><input type="text" name="Parameters[0].Name" class="form-control parameter-name" placeholder="Acil iş ücreti fazlası" /></div>
+                        <div class="col-md-5"><input type="text" name="Parameters[0].Value" class="form-control parameter-value" placeholder="%50" /></div>
+                        <div class="col-md-2"><button type="button" class="btn btn-outline-danger w-100 remove-parameter">X</button></div>
+                    </div>
+                </div>
+                <button type="button" id="addParameter" class="btn btn-outline-secondary btn-sm mt-2">Parametre Ekle +</button>
+            </div>
+
             <div class="submit-section">
                 <button type="submit" class="btn-accent">Belgeleri Oluştur 🚀</button>
                 <div class="form-hint" style="margin-top:12px">Yapay zeka yazışmanızı analiz edecek, bu işlem 10-20 saniye sürebilir.</div>
@@ -73,35 +125,3 @@
     </div>
 </div>
 
-@section Scripts {
-    <script>
-        (() => {
-            window.__ffCreateScriptBound = true;
-            const form = document.getElementById('generateForm');
-            const overlay = document.getElementById('loadingOverlay');
-            const loadingText = document.getElementById('loadingText');
-            const steps = [
-                "Yazışma analiz ediliyor...",
-                "Teklif hazırlanıyor...",
-                "Sözleşme oluşturuluyor...",
-                "Fatura düzenleniyor...",
-                "Son rötuşlar yapılıyor..."
-            ];
-            let current = 0;
-
-            if (form && overlay && loadingText) {
-                form.addEventListener('submit', () => {
-                    overlay.classList.add('show');
-                    setInterval(() => {
-                        loadingText.style.opacity = '0';
-                        setTimeout(() => {
-                            current = (current + 1) % steps.length;
-                            loadingText.textContent = steps[current];
-                            loadingText.style.opacity = '1';
-                        }, 180);
-                    }, 3000);
-                });
-            }
-        })();
-    </script>
-}

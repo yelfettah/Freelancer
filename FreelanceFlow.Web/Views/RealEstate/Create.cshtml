@@ -1,0 +1,49 @@
+@model FreelanceFlow.Core.Models.RealEstateRequest
+@{
+    ViewData["Title"] = "Emlak Analizi";
+}
+<div class="create-container">
+    <div class="create-header">
+        <h1>Emlak Değerleme &amp; İlan Oluşturucu</h1>
+        <p><a asp-action="Compare" class="btn btn-outline-secondary btn-sm">İki mülkü karşılaştırmak mı istiyorsunuz? → Karşılaştırma Moduna Git</a></p>
+    </div>
+    <div class="form-section">
+    <form asp-action="Generate" method="post" id="realEstateForm" data-loading-kind="realestate">
+        <div class="row g-3">
+            <div class="col-12">
+                <label>Mülk Türü</label>
+                <div class="d-flex flex-wrap gap-2">
+                    <label><input type="radio" asp-for="PropertyType" value="Daire" checked /> Daire</label>
+                    <label><input type="radio" asp-for="PropertyType" value="Villa" /> Villa</label>
+                    <label><input type="radio" asp-for="PropertyType" value="Dükkan" /> Dükkan</label>
+                    <label><input type="radio" asp-for="PropertyType" value="Ofis" /> Ofis</label>
+                    <label><input type="radio" asp-for="PropertyType" value="Arsa" /> Arsa</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <label>İşlem Türü</label>
+                <div class="d-flex gap-3">
+                    <label><input type="radio" asp-for="TransactionType" value="Satılık" checked /> Satılık</label>
+                    <label><input type="radio" asp-for="TransactionType" value="Kiralık" /> Kiralık</label>
+                </div>
+            </div>
+            <div class="col-md-4"><input asp-for="City" class="form-control" placeholder="Şehir" /></div>
+            <div class="col-md-4"><input asp-for="District" class="form-control" placeholder="İlçe" /></div>
+            <div class="col-md-4"><input asp-for="Neighborhood" class="form-control" placeholder="Mahalle" /></div>
+            <div class="col-md-4"><input asp-for="SquareMeters" class="form-control" placeholder="m2" /></div>
+            <div class="col-md-4"><select asp-for="RoomCount" class="form-control"><option>Stüdyo</option><option>1+0</option><option>1+1</option><option>2+1</option><option>3+1</option><option>4+1</option><option>5+1</option><option>6+</option></select></div>
+            <div class="col-md-3"><input asp-for="Floor" class="form-control" placeholder="Kat" /></div>
+            <div class="col-md-3"><input asp-for="TotalFloors" class="form-control" placeholder="Toplam Kat" /></div>
+            <div class="col-md-3"><input asp-for="BuildingAge" class="form-control" placeholder="Bina Yaşı" /></div>
+            <div class="col-md-3"><select asp-for="HeatingType" class="form-control"><option>Doğalgaz Kombi</option><option>Merkezi</option><option>Yerden Isıtma</option><option>Klima</option><option>Soba</option><option>Diğer</option></select></div>
+            <div class="col-md-3"><label><input type="checkbox" asp-for="HasElevator" /> Asansör</label></div>
+            <div class="col-md-3"><label><input type="checkbox" asp-for="HasParking" /> Otopark</label></div>
+            <div class="col-md-3"><label><input type="checkbox" asp-for="HasBalcony" /> Balkon</label></div>
+            <div class="col-md-3"><label><input type="checkbox" asp-for="IsFurnished" /> Eşyalı</label></div>
+            <div class="col-md-8"><textarea asp-for="AdditionalFeatures" class="form-control" rows="2" placeholder="Ek Özellikler"></textarea></div>
+        </div>
+        <button class="btn-accent mt-3">Değerleme Yap 🏠</button>
+    </form>
+</div>
+</div>
+<div class="loading-overlay" id="loadingOverlay"><div class="loading-card"><div class="spinner"></div><div class="loading-text" id="loadingText">Bölge fiyatları araştırılıyor...</div><div class="loading-subtext">Karşılaştırma yapılıyor...</div></div></div>

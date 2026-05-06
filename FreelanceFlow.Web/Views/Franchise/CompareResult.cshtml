@@ -1,0 +1,47 @@
+@model FreelanceFlow.Core.Models.FranchiseCompareResult
+@{
+    ViewData["Title"] = "Franchise Karşılaştırma Sonucu";
+    var winnerIs1 = Model.Winner == "Option1";
+    var winnerName = winnerIs1 ? Model.Request1.BrandName : Model.Request2.BrandName;
+}
+<div class="container py-4">
+    <div class="result-header"><h2>@Model.Request1.BrandName vs @Model.Request2.BrandName - Karşılaştırma Sonucu</h2><a asp-action="DownloadComparison" class="download-all-btn">Raporu İndir (PDF)</a></div>
+    <div class="winner-card mb-4">
+        <div class="trophy">🏆</div>
+        <h2>ÖNERİLEN: @winnerName</h2>
+        <p>@Model.WinnerReason</p>
+    </div>
+    <div class="table-responsive comparison-table mb-4">
+        <table class="table mb-0" id="franchiseComparisonTable">
+            <thead><tr><th>Kriter</th><th>Seçenek 1 (@Model.Request1.BrandName)</th><th>Seçenek 2 (@Model.Request2.BrandName)</th><th>Fark/Avantaj</th></tr></thead>
+            <tbody>
+                <tr data-better="lower"><td>İsim Hakkı</td><td data-value="@Model.Report1.FranchiseFee">@Model.Report1.FranchiseFee.ToString("N0") TL</td><td data-value="@Model.Report2.FranchiseFee">@Model.Report2.FranchiseFee.ToString("N0") TL</td><td>@((Model.Report1.FranchiseFee-Model.Report2.FranchiseFee).ToString("+#,##0;-#,##0;0")) TL</td></tr>
+                <tr data-better="lower"><td>Toplam Yatırım</td><td data-value="@Model.Report1.TotalInvestment">@Model.Report1.TotalInvestment.ToString("N0") TL</td><td data-value="@Model.Report2.TotalInvestment">@Model.Report2.TotalInvestment.ToString("N0") TL</td><td>@((Model.Report1.TotalInvestment-Model.Report2.TotalInvestment).ToString("+#,##0;-#,##0;0")) TL</td></tr>
+                <tr data-better="higher"><td>Aylık Tahmini Ciro</td><td data-value="@Model.Report1.MonthlyRevenue">@Model.Report1.MonthlyRevenue.ToString("N0") TL</td><td data-value="@Model.Report2.MonthlyRevenue">@Model.Report2.MonthlyRevenue.ToString("N0") TL</td><td>@((Model.Report1.MonthlyRevenue-Model.Report2.MonthlyRevenue).ToString("+#,##0;-#,##0;0")) TL</td></tr>
+                <tr data-better="higher"><td>Aylık Tahmini Kar</td><td data-value="@Model.Report1.MonthlyProfit">@Model.Report1.MonthlyProfit.ToString("N0") TL</td><td data-value="@Model.Report2.MonthlyProfit">@Model.Report2.MonthlyProfit.ToString("N0") TL</td><td>@((Model.Report1.MonthlyProfit-Model.Report2.MonthlyProfit).ToString("+#,##0;-#,##0;0")) TL</td></tr>
+                <tr data-better="lower"><td>Geri Dönüş Süresi (ay)</td><td data-value="@Model.Report1.ROIMonths">@Model.Report1.ROIMonths ay</td><td data-value="@Model.Report2.ROIMonths">@Model.Report2.ROIMonths ay</td><td>@((Model.Report1.ROIMonths-Model.Report2.ROIMonths).ToString("+#;-#;0")) ay</td></tr>
+                <tr><td>Risk Seviyesi</td><td>@Model.Report1.RiskAssessment</td><td>@Model.Report2.RiskAssessment</td><td>-</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <div class="compare-column compare-column-left">
+                <h5>SEÇENEK 1: @Model.Request1.BrandName - @Model.Request1.City</h5>
+                <div class="card p-3 mb-2"><h6>Nüfus Analizi</h6><p>@Model.Report1.PopulationAnalysis</p></div>
+                <div class="card p-3 mb-2"><h6>Rekabet Analizi</h6><p>@Model.Report1.CompetitionAnalysis</p></div>
+                <div class="card p-3"><h6>Risk Değerlendirmesi</h6><p>@Model.Report1.RiskAssessment</p></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="compare-column compare-column-right">
+                <h5>SEÇENEK 2: @Model.Request2.BrandName - @Model.Request2.City</h5>
+                <div class="card p-3 mb-2"><h6>Nüfus Analizi</h6><p>@Model.Report2.PopulationAnalysis</p></div>
+                <div class="card p-3 mb-2"><h6>Rekabet Analizi</h6><p>@Model.Report2.CompetitionAnalysis</p></div>
+                <div class="card p-3"><h6>Risk Değerlendirmesi</h6><p>@Model.Report2.RiskAssessment</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="card p-4 mb-4" style="background:#fefce8"><h4>Uzman Değerlendirmesi</h4><p>@Model.ComparisonSummary</p></div>
+    <div class="d-flex gap-2"><a asp-action="Compare" class="btn btn-outline-primary">Yeni Karşılaştırma</a><a asp-action="Create" class="btn btn-accent">Tekli Analiz</a></div>
+</div>

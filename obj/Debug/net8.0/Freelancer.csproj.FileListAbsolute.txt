@@ -28,3 +28,4 @@
 /Users/fetahyel/Desktop/Freelancer/Freelancer/obj/Debug/net8.0/Freelancer.pdb
 /Users/fetahyel/Desktop/Freelancer/Freelancer/obj/Debug/net8.0/Freelancer.genruntimeconfig.cache
 /Users/fetahyel/Desktop/Freelancer/Freelancer/obj/Debug/net8.0/ref/Freelancer.dll
+/Users/fetahyel/Desktop/Freelancer/Freelancer/obj/Debug/net8.0/Freelancer.sourcelink.json

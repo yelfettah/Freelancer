@@ -1,0 +1,46 @@
+@model FreelanceFlow.Core.Models.SMEQuoteRequest
+@{
+    ViewData["Title"] = "Hizmet Teklifi";
+}
+<div class="create-container">
+    <div class="create-header">
+        <h1>KOBİ / Esnaf Teklif Oluşturucu</h1>
+    </div>
+    <div class="form-section">
+    <form asp-action="Generate" method="post" id="smeForm" data-loading-kind="sme">
+        <div class="row g-3">
+            <input type="hidden" asp-for="BusinessType" id="selectedBusinessType" />
+            <div class="col-12">
+                <label>İş Türü</label>
+                <div class="row g-2">
+                    <div class="col-md-3"><div class="job-type-card" data-value="Tesisatçı"><div class="emoji">🔧</div>Tesisatçı</div></div>
+                    <div class="col-md-3"><div class="job-type-card" data-value="Elektrikçi"><div class="emoji">⚡</div>Elektrikçi</div></div>
+                    <div class="col-md-3"><div class="job-type-card" data-value="Boyacı"><div class="emoji">🎨</div>Boyacı</div></div>
+                    <div class="col-md-3"><div class="job-type-card" data-value="Tadilat"><div class="emoji">🏗️</div>Tadilat</div></div>
+                    <div class="col-md-3"><div class="job-type-card" data-value="Nakliye"><div class="emoji">🚛</div>Nakliye</div></div>
+                    <div class="col-md-3"><div class="job-type-card" data-value="Temizlik"><div class="emoji">🧹</div>Temizlik</div></div>
+                    <div class="col-md-3"><div class="job-type-card" data-value="Bahçe"><div class="emoji">🌿</div>Bahçe</div></div>
+                    <div class="col-md-3"><div class="job-type-card" data-value="Diğer"><div class="emoji">📦</div>Diğer</div></div>
+                </div>
+            </div>
+            <div class="col-md-4"><input asp-for="ClientName" class="form-control" placeholder="Müşteri Adı" /></div>
+            <div class="col-md-4"><input asp-for="Location" class="form-control" placeholder="Konum" /></div>
+            <div class="col-md-4"><input asp-for="EstimatedHours" class="form-control" placeholder="Tahmini Süre (saat)" /></div>
+            <div class="col-md-4"><label><input type="checkbox" asp-for="MaterialsIncluded" /> Malzeme Dahil Mi</label></div>
+            <div class="col-md-8">
+                <label>Aciliyet</label>
+                <div class="d-flex gap-3">
+                    <label><input type="radio" asp-for="UrgencyLevel" value="Normal" checked /> Normal</label>
+                    <label><input type="radio" asp-for="UrgencyLevel" value="Acil" /> Acil ⚡</label>
+                    <label><input type="radio" asp-for="UrgencyLevel" value="Çok Acil" /> Çok Acil 🔥</label>
+                </div>
+            </div>
+            <div class="col-md-4"><input asp-for="Currency" class="form-control" /></div>
+            <div class="col-12"><textarea asp-for="JobDescription" class="form-control" rows="4" placeholder="İş Tanımı: yapılacak işin kapsamı, metraj, kullanılacak malzeme kalitesi, erişim zorluğu gibi detayları yazın."></textarea></div>
+            <div class="col-12"><textarea asp-for="Notes" class="form-control" rows="3" placeholder="Notlar"></textarea></div>
+        </div>
+        <button class="btn-accent mt-3">Teklif Oluştur 📄</button>
+    </form>
+</div>
+</div>
+<div class="loading-overlay" id="loadingOverlay"><div class="loading-card"><div class="spinner"></div><div class="loading-text" id="loadingText">Piyasa fiyatları kontrol ediliyor...</div><div class="loading-subtext">Maliyet hesaplanıyor...</div></div></div>

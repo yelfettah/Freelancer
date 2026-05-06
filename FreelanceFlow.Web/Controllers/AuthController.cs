@@ -3,6 +3,7 @@ using FreelanceFlow.Core.Entities;
 using FreelanceFlow.Core.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FreelanceFlow.Web.Controllers;
@@ -17,12 +18,14 @@ public class AuthController : Controller
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public IActionResult Login()
     {
         return View();
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Login(string email, string password)
     {
         var user = await _userRepository.GetByEmailAsync(email);
@@ -37,12 +40,14 @@ public class AuthController : Controller
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public IActionResult Register()
     {
         return View();
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Register(string fullName, string email, string password, string confirmPassword)
     {
         if (password != confirmPassword)

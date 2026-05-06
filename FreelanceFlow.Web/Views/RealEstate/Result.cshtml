@@ -1,0 +1,26 @@
+@model FreelanceFlow.Core.Models.RealEstateReport
+@{
+    ViewData["Title"] = "Emlak Sonuç";
+}
+<div class="container py-4">
+    <div class="form-section mb-4 text-center">
+        <div class="price-label">Tahmini Değer</div>
+        <div class="big-price">@Model.EstimatedPrice.ToString("N0") @Model.Currency</div>
+        <div class="price-label">Metrekare Birim Fiyat: @Model.PricePerSqm.ToString("N0") @Model.Currency</div>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-4"><div class="card p-3 h-100"><h5>Piyasa Analizi</h5><p>@Model.MarketAnalysis</p></div></div>
+        <div class="col-md-4"><div class="card p-3 h-100"><h5>Benzer İlanlarla Karşılaştırma</h5><p>@Model.ComparableListings</p></div></div>
+        <div class="col-md-4"><div class="card p-3 h-100"><h5>Hedef Kitle</h5><p>@Model.TargetAudience</p></div></div>
+    </div>
+    <div class="card p-4 mt-4 highlight-card">
+        <h4>Hazır İlan Metni</h4>
+        <h5>@Model.AdTitle</h5>
+        <p id="adText">@Model.AdDescription</p>
+        <button class="btn btn-outline-dark btn-copy" data-target="#adText">İlan Metnini Kopyala</button>
+    </div>
+    <div class="mt-4 d-flex gap-2">
+        <a asp-action="DownloadReport" class="btn btn-success">Raporu İndir (PDF)</a>
+        <a asp-action="Create" class="btn btn-outline-primary">Yeni Değerleme</a>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+@model FreelanceFlow.Core.Models.FranchiseRequest
+@{
+    ViewData["Title"] = "Franchise Analizi";
+}
+<div class="create-container">
+    <div class="create-header">
+        <h1>Franchise Analizi</h1>
+        <p>Marka ve konum bilgilerini girin, detaylı fizibilite raporu oluşturalım.</p>
+        <p><a asp-action="Compare" class="btn btn-outline-secondary btn-sm">İki franchise'ı karşılaştırmak mı istiyorsunuz? → Karşılaştırma Moduna Git</a></p>
+    </div>
+    <div class="form-section">
+    <form asp-action="Generate" method="post" class="mt-3" id="franchiseForm" data-loading-kind="franchise">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <input asp-for="BrandName" class="form-control" placeholder="Marka Adı" list="brandList" />
+                <datalist id="brandList">
+                    <option>Burger King</option><option>McDonald's</option><option>Coffy</option><option>Starbucks</option><option>Simit Sarayı</option><option>Popeyes</option><option>Little Caesars</option><option>Domino's</option><option>Tavuk Dünyası</option><option>Migros Jet</option><option>LC Waikiki</option><option>DeFacto</option><option>Gratis</option><option>A101</option><option>BİM</option><option>ŞOK</option><option>Kahve Dünyası</option><option>Gloria Jeans</option><option>Caribou Coffee</option>
+                </datalist>
+            </div>
+            <div class="col-md-6">
+                <select asp-for="Sector" class="form-control">
+                    <option>Yeme-İçme</option><option>Giyim</option><option>Market/Perakende</option><option>Kahve/Kafe</option><option>Eğitim</option><option>Sağlık/Güzellik</option><option>Teknoloji</option><option>Diğer</option>
+                </select>
+            </div>
+            <div class="col-md-4"><input asp-for="City" class="form-control" placeholder="Şehir" list="cities" /></div>
+            <div class="col-md-4"><input asp-for="District" class="form-control" placeholder="İlçe" /></div>
+            <div class="col-md-4"><input asp-for="Population" class="form-control" placeholder="Tahmini Bölge Nüfusu" /></div>
+            <div class="col-md-6"><input asp-for="Budget" class="form-control" placeholder="Bütçe" /></div>
+            <div class="col-md-6">
+                <select asp-for="Currency" class="form-control"><option>TL</option><option>USD</option><option>EUR</option></select>
+            </div>
+            <div class="col-12"><textarea asp-for="Notes" class="form-control" rows="4" placeholder="Notlar"></textarea></div>
+        </div>
+        <datalist id="cities"><option>Adana</option><option>Adıyaman</option><option>Afyonkarahisar</option><option>Ağrı</option><option>Amasya</option><option>Ankara</option><option>Antalya</option><option>Artvin</option><option>Aydın</option><option>Balıkesir</option><option>Bilecik</option><option>Bingöl</option><option>Bitlis</option><option>Bolu</option><option>Burdur</option><option>Bursa</option><option>Çanakkale</option><option>Çankırı</option><option>Çorum</option><option>Denizli</option><option>Diyarbakır</option><option>Edirne</option><option>Elazığ</option><option>Erzincan</option><option>Erzurum</option><option>Eskişehir</option><option>Gaziantep</option><option>Giresun</option><option>Gümüşhane</option><option>Hakkari</option><option>Hatay</option><option>Isparta</option><option>Mersin</option><option>İstanbul</option><option>İzmir</option><option>Kars</option><option>Kastamonu</option><option>Kayseri</option><option>Kırklareli</option><option>Kırşehir</option><option>Kocaeli</option><option>Konya</option><option>Kütahya</option><option>Malatya</option><option>Manisa</option><option>Kahramanmaraş</option><option>Mardin</option><option>Muğla</option><option>Muş</option><option>Nevşehir</option><option>Niğde</option><option>Ordu</option><option>Rize</option><option>Sakarya</option><option>Samsun</option><option>Siirt</option><option>Sinop</option><option>Sivas</option><option>Tekirdağ</option><option>Tokat</option><option>Trabzon</option><option>Tunceli</option><option>Şanlıurfa</option><option>Uşak</option><option>Van</option><option>Yozgat</option><option>Zonguldak</option><option>Aksaray</option><option>Bayburt</option><option>Karaman</option><option>Kırıkkale</option><option>Batman</option><option>Şırnak</option><option>Bartın</option><option>Ardahan</option><option>Iğdır</option><option>Yalova</option><option>Karabük</option><option>Kilis</option><option>Osmaniye</option><option>Düzce</option></datalist>
+        <button class="btn-accent mt-3" type="submit">Analiz Et 🔍</button>
+    </form>
+</div>
+</div>
+<div class="loading-overlay" id="loadingOverlay"><div class="loading-card"><div class="spinner"></div><div class="loading-text" id="loadingText">Franchise analizi yapılıyor...</div><div class="loading-subtext">Piyasa verileri inceleniyor...</div></div></div>

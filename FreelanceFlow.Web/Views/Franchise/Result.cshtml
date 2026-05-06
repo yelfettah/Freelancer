@@ -1,0 +1,28 @@
+@model FreelanceFlow.Core.Models.FranchiseReport
+@{
+    ViewData["Title"] = "Franchise Sonuç";
+    var req = ViewBag.Request as FreelanceFlow.Core.Models.FranchiseRequest;
+    var roiYears = Model.ROIMonths / 12m;
+}
+<div class="container py-4">
+    <div class="result-header" style="background:linear-gradient(135deg,#1d4ed8,#0ea5e9)">
+        <h2>@Model.BrandName - @Model.City/@Model.District Franchise Analizi Hazır!</h2>
+        <a asp-action="DownloadReport" class="download-all-btn">Raporu İndir (PDF)</a>
+    </div>
+    <div class="form-section mb-4">
+        <h4>Yatırım Özeti</h4>
+        <div class="row g-3">
+            <div class="col-md-3"><div class="stat-box"><span>İsim Hakkı</span><strong>@Model.FranchiseFee.ToString("N0") @Model.Currency</strong></div></div>
+            <div class="col-md-3"><div class="stat-box"><span>Toplam Yatırım</span><strong>@Model.TotalInvestment.ToString("N0") @Model.Currency</strong></div></div>
+            <div class="col-md-3"><div class="stat-box"><span>Aylık Ciro / Kar</span><strong>@Model.MonthlyRevenue.ToString("N0") / @Model.MonthlyProfit.ToString("N0")</strong></div></div>
+            <div class="col-md-3"><div class="stat-box"><span>Geri Dönüş</span><strong>@Model.ROIMonths ay (@roiYears.ToString("0.0") yıl)</strong></div></div>
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-6"><div class="card p-3 h-100"><h5>Nüfus & Bölge Analizi</h5><p>@Model.PopulationAnalysis</p></div></div>
+        <div class="col-md-6"><div class="card p-3 h-100"><h5>Rekabet Analizi</h5><p>@Model.CompetitionAnalysis</p></div></div>
+        <div class="col-md-6"><div class="card p-3 h-100"><h5>Risk Değerlendirmesi</h5><p>@Model.RiskAssessment</p></div></div>
+        <div class="col-md-6"><div class="card p-3 h-100"><h5>Öneri & Değerlendirme</h5><p>@Model.Recommendation</p></div></div>
+    </div>
+    <a asp-action="Create" class="btn btn-outline-primary mt-4">Yeni Analiz</a>
+</div>

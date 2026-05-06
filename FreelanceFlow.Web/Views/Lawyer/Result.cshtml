@@ -1,0 +1,52 @@
+@model FreelanceFlow.Core.Models.LawyerReport
+@{
+    ViewData["Title"] = "Hukuki Sonuç";
+}
+<div class="container py-4">
+    <div class="result-header" style="background:linear-gradient(135deg,#7f1d1d,#ef4444)">
+        <h2>@Model.CaseType - Hukuki Analiz Raporu Hazır!</h2>
+    </div>
+
+    <div class="form-section mb-4">
+        <h4>Maliyet Özeti</h4>
+        <p>Avukatlık Ücreti: <strong>@Model.MinLawyerFee.ToString("N0") - @Model.MaxLawyerFee.ToString("N0") @Model.Currency</strong></p>
+        <p>Mahkeme Harçları: <strong>@Model.CourtFees.ToString("N0") @Model.Currency</strong></p>
+        <p>Bilirkişi Ücreti: <strong>@Model.ExpertFees.ToString("N0") @Model.Currency</strong></p>
+        <div class="big-price">@Model.TotalEstimatedCost.ToString("N0") @Model.Currency</div>
+        <div class="price-label">TOPLAM TAHMİNİ MALİYET</div>
+    </div>
+
+    <div class="card p-3 mb-3">
+        <h5>Tahmini Süre</h5>
+        <div class="big-price">@Model.EstimatedDurationMonths ay</div>
+        <div class="price-label">yaklaşık @Model.EstimatedDurationYears yıl</div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="card p-3 h-100">
+                <h5>Dava Süreci Adımları</h5>
+                @for (var i = 0; i < Model.ProcessSteps.Count; i++)
+                {
+                    <div class="timeline-step"><div class="timeline-dot"></div><div><strong>Adım @(i + 1)</strong><div>@Model.ProcessSteps[i]</div></div></div>
+                }
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card p-3 h-100 mb-3">
+                <h5>Başarıyı Etkileyen Faktörler</h5>
+                <ul>@foreach (var item in Model.SuccessFactors){<li>@item</li>}</ul>
+            </div>
+            <div class="card p-3 h-100">
+                <h5>Yasal Dayanak</h5>
+                <p>@Model.LegalReferences</p>
+                <h5>Öneri ve Strateji</h5>
+                <p>@Model.Recommendation</p>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4 d-flex gap-2">
+        <a asp-action="DownloadReport" class="btn btn-success">Raporu İndir (PDF)</a>
+        <a asp-action="Create" class="btn btn-outline-primary">Yeni Hesaplama</a>
+    </div>
+</div>

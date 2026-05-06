@@ -1,0 +1,46 @@
+@model FreelanceFlow.Core.Models.FreelancerProfile
+@{
+    ViewData["Title"] = "Profil";
+}
+<div class="create-container">
+    <div class="create-header">
+        <h1>Profilim &amp; Ayarlar</h1>
+        <p>Bu bilgiler belge oluşturulurken otomatik kullanılacak.</p>
+    </div>
+    <div class="form-section">
+    <form asp-action="Save" method="post" id="profileForm">
+        <div class="row g-3">
+            <h5>Kişisel Bilgiler</h5>
+            <div class="col-md-6"><input asp-for="FullName" class="form-control" placeholder="Ad Soyad" /></div>
+            <div class="col-md-6"><input asp-for="Email" class="form-control" placeholder="E-posta" /></div>
+            <div class="col-md-6"><input asp-for="Phone" class="form-control" placeholder="Telefon" /></div>
+            <div class="col-md-3"><input asp-for="HourlyRate" class="form-control" placeholder="Saatlik Ücret" /></div>
+            <div class="col-md-3"><input asp-for="DailyRate" class="form-control" placeholder="Günlük Ücret" /></div>
+            <div class="col-md-3"><input asp-for="Currency" class="form-control" /></div>
+            <div class="col-md-3">
+                <select asp-for="KDVRate" class="form-control kdv-slider"><option value="0">0%</option><option value="0.08">8%</option><option value="0.10">10%</option><option value="0.18">18%</option><option value="0.20">20%</option></select>
+            </div>
+            <div class="col-md-6"><input asp-for="BankName" class="form-control" placeholder="Banka" /></div>
+            <div class="col-md-6"><input asp-for="IBAN" class="form-control" placeholder="IBAN" /></div>
+            <div class="col-md-6"><input asp-for="Expertise" class="form-control" placeholder="Uzmanlık" /></div>
+            <div class="col-md-6"><input asp-for="ExperienceYears" class="form-control" placeholder="Deneyim Yılı" /></div>
+            <div class="col-md-6"><input asp-for="TaxNumber" class="form-control" placeholder="Vergi No" /></div>
+            <div class="col-md-6"><input asp-for="Address" class="form-control" placeholder="Adres" /></div>
+            <div class="col-12 mt-3">
+                <h5>Özel Parametreler</h5>
+                <div id="parameterContainer"></div>
+                <button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="addParameter">Yeni Parametre Ekle</button>
+            </div>
+            <div class="col-12">
+                <div class="alert alert-info mb-0">Bu bilgiler sadece bu oturumda saklanır. Freelancer belge oluştururken yapay zeka bu bilgileri kullanarak daha doğru fiyatlandırma yapacaktır.</div>
+            </div>
+        </div>
+        <div class="d-flex gap-2 mt-3">
+            <button class="btn-accent">Kaydet</button>
+        </div>
+    </form>
+    <form asp-controller="Auth" asp-action="Logout" method="post" class="mt-2">
+        <button type="submit" class="btn btn-outline-danger">Çıkış Yap</button>
+    </form>
+</div>
+</div>

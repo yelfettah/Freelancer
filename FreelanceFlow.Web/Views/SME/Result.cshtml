@@ -1,0 +1,25 @@
+@model FreelanceFlow.Core.Models.SMEQuoteReport
+@{
+    ViewData["Title"] = "Hizmet Teklifi Sonuç";
+}
+<div class="container py-4">
+    <div class="form-section mb-4">
+        <h3>@Model.BusinessType - @Model.ClientName</h3>
+        <div class="row g-3">
+            <div class="col-md-4"><div class="stat-box"><span>İşçilik</span><strong>@Model.LaborCost.ToString("N0") @Model.Currency</strong></div></div>
+            <div class="col-md-4"><div class="stat-box"><span>Malzeme</span><strong>@Model.MaterialCost.ToString("N0") @Model.Currency</strong></div></div>
+            <div class="col-md-4"><div class="stat-box"><span>TOPLAM</span><strong class="big-price">@Model.TotalCost.ToString("N0") @Model.Currency</strong></div></div>
+        </div>
+    </div>
+    <div class="card p-3">
+        <h5>Kalem Kalem Döküm</h5>
+        <ul>@foreach (var row in Model.Breakdown){<li>@row</li>}</ul>
+        <p><strong>Tahmini Süre:</strong> @Model.Timeline</p>
+        <p><strong>Garanti Koşulları:</strong> @Model.Warranty</p>
+        <p><strong>Ödeme Koşulları:</strong> @Model.Terms</p>
+    </div>
+    <div class="mt-3 d-flex gap-2">
+        <a asp-action="DownloadReport" class="btn btn-success">Teklifi İndir (PDF)</a>
+        <a asp-action="Create" class="btn btn-outline-primary">Yeni Teklif</a>
+    </div>
+</div>

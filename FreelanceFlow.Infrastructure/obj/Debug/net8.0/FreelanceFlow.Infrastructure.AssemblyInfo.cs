@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FreelanceFlow.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d30d9076fc37124dc6f560fd63b13d774eeba0c3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4cd920be0528ee7e0e835caa7b773aceb96f020")]
 [assembly: System.Reflection.AssemblyProductAttribute("FreelanceFlow.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FreelanceFlow.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

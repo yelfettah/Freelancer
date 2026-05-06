@@ -1,0 +1,47 @@
+@model FreelanceFlow.Core.Models.RealEstateCompareRequest
+@{
+    ViewData["Title"] = "Emlak Karşılaştırma";
+}
+<div class="create-container compare-container">
+    <div class="create-header">
+        <h1>Emlak Karşılaştırma</h1>
+        <p>İki mülkü yan yana karşılaştırın</p>
+    </div>
+    <form asp-action="CompareGenerate" method="post" data-loading-kind="realestate-compare">
+        <div class="row g-4 align-items-stretch position-relative">
+            <div class="col-md-6">
+                <div class="compare-column compare-column-left">
+                    <h5>MÜLK 1</h5>
+                    <input asp-for="Option1.PropertyType" class="form-control mb-2" placeholder="Mülk Türü" />
+                    <input asp-for="Option1.TransactionType" class="form-control mb-2" placeholder="İşlem Türü" />
+                    <input asp-for="Option1.City" class="form-control mb-2" placeholder="Şehir" />
+                    <input asp-for="Option1.District" class="form-control mb-2" placeholder="İlçe" />
+                    <input asp-for="Option1.Neighborhood" class="form-control mb-2" placeholder="Mahalle" />
+                    <div class="row g-2"><div class="col-6"><input asp-for="Option1.SquareMeters" class="form-control" placeholder="Metrekare" /></div><div class="col-6"><input asp-for="Option1.RoomCount" class="form-control" placeholder="Oda Sayısı" /></div></div>
+                    <div class="row g-2 mt-1"><div class="col-6"><input asp-for="Option1.Floor" class="form-control" placeholder="Kat" /></div><div class="col-6"><input asp-for="Option1.TotalFloors" class="form-control" placeholder="Toplam Kat" /></div></div>
+                    <input asp-for="Option1.BuildingAge" class="form-control mt-2" placeholder="Bina Yaşı" />
+                    <input asp-for="Option1.HeatingType" class="form-control mt-2" placeholder="Isıtma" />
+                    <div class="d-flex gap-3 mt-2"><label><input type="checkbox" asp-for="Option1.HasElevator" /> Asansör</label><label><input type="checkbox" asp-for="Option1.HasParking" /> Otopark</label><label><input type="checkbox" asp-for="Option1.HasBalcony" /> Balkon</label></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="compare-column compare-column-right">
+                    <h5>MÜLK 2</h5>
+                    <input asp-for="Option2.PropertyType" class="form-control mb-2" placeholder="Mülk Türü" />
+                    <input asp-for="Option2.TransactionType" class="form-control mb-2" placeholder="İşlem Türü" />
+                    <input asp-for="Option2.City" class="form-control mb-2" placeholder="Şehir" />
+                    <input asp-for="Option2.District" class="form-control mb-2" placeholder="İlçe" />
+                    <input asp-for="Option2.Neighborhood" class="form-control mb-2" placeholder="Mahalle" />
+                    <div class="row g-2"><div class="col-6"><input asp-for="Option2.SquareMeters" class="form-control" placeholder="Metrekare" /></div><div class="col-6"><input asp-for="Option2.RoomCount" class="form-control" placeholder="Oda Sayısı" /></div></div>
+                    <div class="row g-2 mt-1"><div class="col-6"><input asp-for="Option2.Floor" class="form-control" placeholder="Kat" /></div><div class="col-6"><input asp-for="Option2.TotalFloors" class="form-control" placeholder="Toplam Kat" /></div></div>
+                    <input asp-for="Option2.BuildingAge" class="form-control mt-2" placeholder="Bina Yaşı" />
+                    <input asp-for="Option2.HeatingType" class="form-control mt-2" placeholder="Isıtma" />
+                    <div class="d-flex gap-3 mt-2"><label><input type="checkbox" asp-for="Option2.HasElevator" /> Asansör</label><label><input type="checkbox" asp-for="Option2.HasParking" /> Otopark</label><label><input type="checkbox" asp-for="Option2.HasBalcony" /> Balkon</label></div>
+                </div>
+            </div>
+            <div class="d-none d-md-flex justify-content-center align-items-center position-absolute top-50 start-50 translate-middle" style="pointer-events:none;"><div class="vs-badge">VS</div></div>
+        </div>
+        <div class="text-center mt-4"><button class="btn-accent" type="submit">Karşılaştır 🏠</button></div>
+    </form>
+</div>
+<div class="loading-overlay" id="loadingOverlay"><div class="loading-card"><div class="spinner"></div><div class="loading-text" id="loadingText">İlk mülk değerleniyor...</div><div class="loading-subtext">İkinci mülk için analiz hazırlanıyor...</div></div></div>

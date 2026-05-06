@@ -1,0 +1,45 @@
+@model FreelanceFlow.Core.Models.FranchiseCompareRequest
+@{
+    ViewData["Title"] = "Franchise Karşılaştırma";
+}
+
+<div class="create-container compare-container">
+    <div class="create-header">
+        <h1>Franchise Karşılaştırma</h1>
+        <p>İki franchise seçeneğini yan yana karşılaştırın, hangisi daha karlı öğrenin.</p>
+    </div>
+    <form asp-action="CompareGenerate" method="post" data-loading-kind="franchise-compare">
+        <div class="row g-4 align-items-stretch position-relative">
+            <div class="col-md-6">
+                <div class="compare-column compare-column-left">
+                    <h5>SEÇENEK 1</h5>
+                    <input asp-for="Option1.BrandName" class="form-control mb-2" placeholder="Marka Adı" list="brandList" />
+                    <select asp-for="Option1.Sector" class="form-control mb-2"><option>Yeme-İçme</option><option>Giyim</option><option>Market/Perakende</option><option>Kahve/Kafe</option><option>Eğitim</option><option>Sağlık/Güzellik</option><option>Teknoloji</option><option>Diğer</option></select>
+                    <input asp-for="Option1.City" class="form-control mb-2" placeholder="Şehir" />
+                    <input asp-for="Option1.District" class="form-control mb-2" placeholder="İlçe" />
+                    <input asp-for="Option1.Population" class="form-control mb-2" placeholder="Tahmini Nüfus" />
+                    <div class="row g-2"><div class="col-8"><input asp-for="Option1.Budget" class="form-control" placeholder="Bütçe" /></div><div class="col-4"><select asp-for="Option1.Currency" class="form-control"><option>TL</option><option>USD</option><option>EUR</option></select></div></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="compare-column compare-column-right">
+                    <h5>SEÇENEK 2</h5>
+                    <input asp-for="Option2.BrandName" class="form-control mb-2" placeholder="Marka Adı" list="brandList" />
+                    <select asp-for="Option2.Sector" class="form-control mb-2"><option>Yeme-İçme</option><option>Giyim</option><option>Market/Perakende</option><option>Kahve/Kafe</option><option>Eğitim</option><option>Sağlık/Güzellik</option><option>Teknoloji</option><option>Diğer</option></select>
+                    <input asp-for="Option2.City" class="form-control mb-2" placeholder="Şehir" />
+                    <input asp-for="Option2.District" class="form-control mb-2" placeholder="İlçe" />
+                    <input asp-for="Option2.Population" class="form-control mb-2" placeholder="Tahmini Nüfus" />
+                    <div class="row g-2"><div class="col-8"><input asp-for="Option2.Budget" class="form-control" placeholder="Bütçe" /></div><div class="col-4"><select asp-for="Option2.Currency" class="form-control"><option>TL</option><option>USD</option><option>EUR</option></select></div></div>
+                </div>
+            </div>
+            <div class="d-none d-md-flex justify-content-center align-items-center position-absolute top-50 start-50 translate-middle" style="pointer-events:none;">
+                <div class="vs-badge">VS</div>
+            </div>
+        </div>
+        <datalist id="brandList">
+            <option>Burger King</option><option>McDonald's</option><option>Coffy</option><option>Starbucks</option><option>Simit Sarayı</option><option>Popeyes</option><option>Little Caesars</option><option>Domino's</option><option>Tavuk Dünyası</option><option>Migros Jet</option><option>LC Waikiki</option><option>DeFacto</option><option>Gratis</option><option>A101</option><option>BİM</option><option>ŞOK</option><option>Kahve Dünyası</option><option>Gloria Jeans</option><option>Caribou Coffee</option>
+        </datalist>
+        <div class="text-center mt-4"><button class="btn-accent" type="submit">Karşılaştır ⚖️</button></div>
+    </form>
+</div>
+<div class="loading-overlay" id="loadingOverlay"><div class="loading-card"><div class="spinner"></div><div class="loading-text" id="loadingText">İki franchise analiz ediliyor...</div><div class="loading-subtext">Karşılaştırma yapılıyor...</div></div></div>

@@ -1,0 +1,51 @@
+@model FreelanceFlow.Core.Models.RealEstateCompareResult
+@{
+    ViewData["Title"] = "Emlak Karşılaştırma Sonucu";
+    var winner1 = Model.BetterValue == "Option1";
+    var priceDiff = Model.Report1.EstimatedPrice - Model.Report2.EstimatedPrice;
+}
+<div class="container py-4">
+    <div class="result-header"><h2>Emlak Karşılaştırma Sonucu</h2><a asp-action="DownloadComparison" class="download-all-btn">Raporu İndir (PDF)</a></div>
+    <div class="price-comparison-box position-relative mb-4">
+        <div class="price-box @(winner1 ? "winner" : "")">
+            <div class="label">MÜLK 1</div>
+            <div class="price">@Model.Report1.EstimatedPrice.ToString("N0") @Model.Report1.Currency</div>
+            <div class="label">@Model.Report1.PricePerSqm.ToString("N0") @Model.Report1.Currency / m²</div>
+            <div class="label">@Model.Request1.City / @Model.Request1.District</div>
+        </div>
+        <div class="price-box @(!winner1 ? "winner" : "")">
+            <div class="label">MÜLK 2</div>
+            <div class="price">@Model.Report2.EstimatedPrice.ToString("N0") @Model.Report2.Currency</div>
+            <div class="label">@Model.Report2.PricePerSqm.ToString("N0") @Model.Report2.Currency / m²</div>
+            <div class="label">@Model.Request2.City / @Model.Request2.District</div>
+        </div>
+        <div class="price-difference">@priceDiff.ToString("+#,##0;-#,##0;0") TL</div>
+    </div>
+
+    <div class="winner-card mb-4">
+        <div class="trophy">🏆</div>
+        <h2>Daha İyi Değer: @(winner1 ? "MÜLK 1" : "MÜLK 2")</h2>
+        <p>@Model.BetterValueReason</p>
+    </div>
+
+    <div class="table-responsive comparison-table mb-4">
+        <table class="table mb-0" id="realEstateComparisonTable">
+            <thead><tr><th>Kriter</th><th>Mülk 1</th><th>Mülk 2</th><th>Fark</th></tr></thead>
+            <tbody>
+                <tr data-better="lower"><td>Fiyat</td><td data-value="@Model.Report1.EstimatedPrice">@Model.Report1.EstimatedPrice.ToString("N0") TL</td><td data-value="@Model.Report2.EstimatedPrice">@Model.Report2.EstimatedPrice.ToString("N0") TL</td><td>@((Model.Report1.EstimatedPrice-Model.Report2.EstimatedPrice).ToString("+#,##0;-#,##0;0")) TL</td></tr>
+                <tr data-better="lower"><td>m² Birim Fiyat</td><td data-value="@Model.Report1.PricePerSqm">@Model.Report1.PricePerSqm.ToString("N0") TL</td><td data-value="@Model.Report2.PricePerSqm">@Model.Report2.PricePerSqm.ToString("N0") TL</td><td>@((Model.Report1.PricePerSqm-Model.Report2.PricePerSqm).ToString("+#,##0;-#,##0;0")) TL</td></tr>
+                <tr><td>Metrekare</td><td>@Model.Request1.SquareMeters</td><td>@Model.Request2.SquareMeters</td><td>@(Model.Request1.SquareMeters-Model.Request2.SquareMeters)</td></tr>
+                <tr><td>Oda</td><td>@Model.Request1.RoomCount</td><td>@Model.Request2.RoomCount</td><td>-</td></tr>
+                <tr><td>Kat</td><td>@Model.Request1.Floor / @Model.Request1.TotalFloors</td><td>@Model.Request2.Floor / @Model.Request2.TotalFloors</td><td>-</td></tr>
+                <tr><td>Yaş</td><td>@Model.Request1.BuildingAge</td><td>@Model.Request2.BuildingAge</td><td>@(Model.Request1.BuildingAge-Model.Request2.BuildingAge)</td></tr>
+                <tr><td>Konum</td><td>@Model.Request1.City / @Model.Request1.District</td><td>@Model.Request2.City / @Model.Request2.District</td><td>-</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-6"><div class="card p-3"><h5>Mülk 1 Piyasa Analizi</h5><p>@Model.Report1.MarketAnalysis</p><h6>İlan Metni</h6><p>@Model.Report1.AdDescription</p></div></div>
+        <div class="col-md-6"><div class="card p-3"><h5>Mülk 2 Piyasa Analizi</h5><p>@Model.Report2.MarketAnalysis</p><h6>İlan Metni</h6><p>@Model.Report2.AdDescription</p></div></div>
+    </div>
+    <div class="card p-4" style="background:#eff6ff"><h4>AI Karşılaştırma Özeti</h4><p>@Model.ComparisonSummary</p></div>
+</div>

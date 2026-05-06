@@ -26,12 +26,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/Dashboard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFzaGJvYXJkL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/Document/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRG9jdW1lbnQvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/Document/Result.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRG9jdW1lbnQvUmVzdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/Franchise/Compare.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRnJhbmNoaXNlL0NvbXBhcmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/Franchise/CompareResult.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRnJhbmNoaXNlL0NvbXBhcmVSZXN1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/Franchise/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRnJhbmNoaXNlL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/Franchise/Result.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRnJhbmNoaXNlL1Jlc3VsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/History/Index.cshtml]
@@ -46,12 +66,48 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/Lawyer/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTGF3eWVyL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/Lawyer/Result.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTGF3eWVyL1Jlc3VsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/Profile/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmlsZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/RealEstate/Compare.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVhbEVzdGF0ZS9Db21wYXJlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/RealEstate/CompareResult.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVhbEVzdGF0ZS9Db21wYXJlUmVzdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/RealEstate/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVhbEVzdGF0ZS9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/RealEstate/Result.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVhbEVzdGF0ZS9SZXN1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/SME/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU01FL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/SME/Result.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU01FL1Jlc3VsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/Views/_ViewImports.cshtml]
