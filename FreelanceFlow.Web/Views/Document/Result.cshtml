@@ -3,6 +3,19 @@
     ViewData["Title"] = "Sonuç";
 }
 
+@if (Model is null)
+{
+    <section class="py-5">
+        <div class="container">
+            <div class="alert alert-warning">
+                Sonuç verisi bulunamadı. Lütfen tekrar deneyin.
+            </div>
+            <a class="btn btn-accent" asp-controller="Document" asp-action="Create">Belge Oluştur sayfasına dön</a>
+        </div>
+    </section>
+    return;
+}
+
 <section class="py-4">
     <div class="container">
         <div class="success-banner mb-4 p-4 p-md-5">

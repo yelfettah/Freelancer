@@ -84,7 +84,7 @@ public class DocumentController : Controller
         TempData["GeneratedResult"] = generatedResultJson;
         TempData["ConversationInput"] = conversationInputJson;
 
-        return View();
+        return View(generatedResult);
     }
 
     [HttpGet]

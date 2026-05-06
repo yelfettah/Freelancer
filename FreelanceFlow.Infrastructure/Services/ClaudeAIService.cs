@@ -95,7 +95,7 @@ public class ClaudeAIService : IClaudeAIService
                 throw new InvalidOperationException("Gemini API yanıtında geçerli içerik bulunamadı.");
             }
 
-            var parsed = JsonSerializer.Deserialize<GeneratedDocuments>(aiText, jsonOptions);
+            var parsed = await DeserializeGeneratedDocumentsSafelyAsync(aiText, jsonOptions, apiKey, modelCandidates);
             if (parsed is null)
             {
                 throw new InvalidOperationException("Gemini API yanıtındaki JSON çözümlenemedi.");
@@ -182,5 +182,102 @@ public class ClaudeAIService : IClaudeAIService
         }
 
         throw new InvalidOperationException($"Gemini API isteği başarısız oldu. {lastError}");
+    }
+
+    private async Task<GeneratedDocuments?> DeserializeGeneratedDocumentsSafelyAsync(
+        string aiText,
+        JsonSerializerOptions jsonOptions,
+        string apiKey,
+        List<string> modelCandidates)
+    {
+        var normalizedText = ExtractJsonObject(aiText);
+        var parsed = TryDeserializeGeneratedDocuments(normalizedText, jsonOptions);
+        if (parsed is not null)
+        {
+            return parsed;
+        }
+
+        var repairedJson = await RepairJsonWithModelAsync(normalizedText, apiKey, modelCandidates);
+        var repairedNormalized = ExtractJsonObject(repairedJson);
+        return TryDeserializeGeneratedDocuments(repairedNormalized, jsonOptions);
+    }
+
+    private static GeneratedDocuments? TryDeserializeGeneratedDocuments(string jsonText, JsonSerializerOptions jsonOptions)
+    {
+        try
+        {
+            return JsonSerializer.Deserialize<GeneratedDocuments>(jsonText, jsonOptions);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static string ExtractJsonObject(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return string.Empty;
+        }
+
+        var trimmed = text.Trim();
+        if (trimmed.StartsWith("```", StringComparison.Ordinal))
+        {
+            var firstBraceInBlock = trimmed.IndexOf('{');
+            if (firstBraceInBlock >= 0)
+            {
+                trimmed = trimmed[firstBraceInBlock..];
+            }
+        }
+
+        var firstBrace = trimmed.IndexOf('{');
+        var lastBrace = trimmed.LastIndexOf('}');
+        if (firstBrace >= 0 && lastBrace > firstBrace)
+        {
+            return trimmed[firstBrace..(lastBrace + 1)];
+        }
+
+        return trimmed;
+    }
+
+    private async Task<string> RepairJsonWithModelAsync(
+        string brokenJson,
+        string apiKey,
+        List<string> modelCandidates)
+    {
+        var repairRequestBody = new
+        {
+            contents = new[]
+            {
+                new
+                {
+                    role = "user",
+                    parts = new[]
+                    {
+                        new
+                        {
+                            text =
+                                "Aşağıdaki JSON metnini düzelt. SADECE geçerli JSON döndür. Açıklama, markdown veya ek metin yazma.\n\n" +
+                                brokenJson
+                        }
+                    }
+                }
+            },
+            generationConfig = new
+            {
+                maxOutputTokens = 4096,
+                responseMimeType = "application/json"
+            }
+        };
+
+        var response = await SendWithRetryAndFallbackAsync(apiKey, repairRequestBody, modelCandidates);
+        var responseContent = await response.Content.ReadAsStringAsync();
+        var geminiResponse = JsonSerializer.Deserialize<GeminiResponse>(responseContent, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
+
+        return geminiResponse?.Candidates?.FirstOrDefault()?.Content?.Parts?.FirstOrDefault()?.Text ?? string.Empty;
     }
 }
