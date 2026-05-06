@@ -1,0 +1,12 @@
+/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/bin/Debug/net8.0/FreelanceFlow.Core.deps.json
+/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/bin/Debug/net8.0/FreelanceFlow.Core.dll
+/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/bin/Debug/net8.0/FreelanceFlow.Core.pdb
+/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/obj/Debug/net8.0/FreelanceFlow.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/obj/Debug/net8.0/FreelanceFlow.Core.AssemblyInfoInputs.cache
+/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/obj/Debug/net8.0/FreelanceFlow.Core.AssemblyInfo.cs
+/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/obj/Debug/net8.0/FreelanceFlow.Core.csproj.CoreCompileInputs.cache
+/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/obj/Debug/net8.0/FreelanceFlow.Core.sourcelink.json
+/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/obj/Debug/net8.0/FreelanceFlow.Core.dll
+/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/obj/Debug/net8.0/refint/FreelanceFlow.Core.dll
+/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/obj/Debug/net8.0/FreelanceFlow.Core.pdb
+/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/obj/Debug/net8.0/ref/FreelanceFlow.Core.dll

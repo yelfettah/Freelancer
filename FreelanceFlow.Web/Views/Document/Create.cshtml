@@ -1,0 +1,90 @@
+@model FreelanceFlow.Core.Models.ConversationInput
+@{
+    ViewData["Title"] = "Belge Oluştur";
+}
+
+<section class="py-5 bg-light-blue">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm p-4 p-md-5">
+                    <h1 class="fw-bold mb-2">Belge Oluştur</h1>
+                    <p class="text-muted mb-4">Müşterinizle yaptığınız yazışmayı yapıştırın, gerisini bize bırakın.</p>
+
+                    <form method="post" asp-action="Generate" asp-controller="Document" id="documentForm">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="mb-4">
+                            <label asp-for="RawText" class="form-label fw-semibold">Yazışma</label>
+                            <textarea asp-for="RawText"
+                                      class="form-control"
+                                      rows="12"
+                                      id="conversationTextarea"
+                                      placeholder="WhatsApp veya e-posta yazışmanızı buraya yapıştırın...
+
+Örnek:
+[10:15] Müşteri: Merhaba, web sitesi yaptırmak istiyoruz.
+[10:16] Freelancer: Merhaba, tabii. Detayları konuşalım..."></textarea>
+                            <span asp-validation-for="RawText" class="text-danger"></span>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="FreelancerName" class="form-label fw-semibold">Freelancer Adı</label>
+                                <input asp-for="FreelancerName" class="form-control" required />
+                                <span asp-validation-for="FreelancerName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="ClientName" class="form-label fw-semibold">Müşteri Adı</label>
+                                <input asp-for="ClientName" class="form-control" required />
+                                <span asp-validation-for="ClientName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label asp-for="Sector" class="form-label fw-semibold">Sektör</label>
+                                <select asp-for="Sector" class="form-select">
+                                    <option>Yazılım</option>
+                                    <option>Tasarım</option>
+                                    <option>Çeviri</option>
+                                    <option>Danışmanlık</option>
+                                    <option>Mimarlık</option>
+                                    <option>Fotoğraf/Video</option>
+                                    <option>Diğer</option>
+                                </select>
+                                <span asp-validation-for="Sector" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Currency" class="form-label fw-semibold">Para Birimi</label>
+                                <select asp-for="Currency" class="form-select">
+                                    <option>TL</option>
+                                    <option>USD</option>
+                                    <option>EUR</option>
+                                </select>
+                                <span asp-validation-for="Currency" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-accent btn-lg px-5">Belgeleri Oluştur 🚀</button>
+                        <p class="text-muted mt-3 mb-0 small">Yapay zeka yazışmanızı analiz edecek, bu işlem 10-20 saniye sürebilir.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="text-center text-white">
+        <div class="spinner-border text-light mb-3" role="status">
+            <span class="visually-hidden">Yükleniyor...</span>
+        </div>
+        <h4 class="fw-semibold">Yapay zeka yazışmanızı analiz ediyor...</h4>
+        <p class="mb-0 loading-message">Teklif hazırlanıyor... Sözleşme oluşturuluyor... Fatura düzenleniyor...</p>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

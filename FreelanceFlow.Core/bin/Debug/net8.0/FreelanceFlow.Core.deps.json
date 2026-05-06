@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "FreelanceFlow.Core/1.0.0": {
+        "runtime": {
+          "FreelanceFlow.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FreelanceFlow.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

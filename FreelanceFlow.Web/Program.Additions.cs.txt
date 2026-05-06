@@ -1,0 +1,16 @@
+using FreelanceFlow.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
+builder.Services
+    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Auth/Login";
+    });
+
+builder.Services.AddScoped<IConversationRepository, ConversationRepository>();
+builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IDocumentService, DocumentService>();
+
+app.UseAuthentication();

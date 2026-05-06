@@ -4,14 +4,14 @@
     "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/FreelanceFlow.Web.csproj": {}
   },
   "projects": {
-    "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/FreelanceFlow.Web.csproj": {
+    "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/FreelanceFlow.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/FreelanceFlow.Web.csproj",
-        "projectName": "FreelanceFlow.Web",
-        "projectPath": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/FreelanceFlow.Web.csproj",
+        "projectUniqueName": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/FreelanceFlow.Core.csproj",
+        "projectName": "FreelanceFlow.Core",
+        "projectPath": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/FreelanceFlow.Core.csproj",
         "packagesPath": "/Users/fetahyel/.nuget/packages/",
-        "outputPath": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/obj/",
+        "outputPath": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/fetahyel/.nuget/NuGet/NuGet.Config"
@@ -42,6 +42,161 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.413/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Infrastructure/FreelanceFlow.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Infrastructure/FreelanceFlow.Infrastructure.csproj",
+        "projectName": "FreelanceFlow.Infrastructure",
+        "projectPath": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Infrastructure/FreelanceFlow.Infrastructure.csproj",
+        "packagesPath": "/Users/fetahyel/.nuget/packages/",
+        "outputPath": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/fetahyel/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/FreelanceFlow.Core.csproj": {
+                "projectPath": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/FreelanceFlow.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[8.0.13, )"
+            },
+            "QuestPDF": {
+              "target": "Package",
+              "version": "[2026.2.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.413/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/FreelanceFlow.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/FreelanceFlow.Web.csproj",
+        "projectName": "FreelanceFlow.Web",
+        "projectPath": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/FreelanceFlow.Web.csproj",
+        "packagesPath": "/Users/fetahyel/.nuget/packages/",
+        "outputPath": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Web/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/fetahyel/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/FreelanceFlow.Core.csproj": {
+                "projectPath": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Core/FreelanceFlow.Core.csproj"
+              },
+              "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Infrastructure/FreelanceFlow.Infrastructure.csproj": {
+                "projectPath": "/Users/fetahyel/Desktop/Freelancer/Freelancer/FreelanceFlow.Infrastructure/FreelanceFlow.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.13, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
